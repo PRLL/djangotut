@@ -25,3 +25,16 @@ python manage.py startapp blog
 
 -- create superuser:
 python manage.py createsuperuser
+
+## PYTHONANYWHERE DEPLOY ##
+
+-- remember to create new ApiToken
+
+-- install everything needed
+pip3.8 install --user pythonanywhere
+
+-- autoconfigure using code from github
+pa_autoconfigure_django.py --python=3.8 https://github.com/<your-github-username>/my-first-blog.git
+
+-- create superuser
+python manage.py createsuperuser
