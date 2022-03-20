@@ -1,40 +1,67 @@
--- create & run virtualenv:
+------------------------------ create & run virtualenv:
 python -m venv djangogirls
 djangoenv\Scripts\activate
     (if error on windows):
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
-## FROM HERE ON, RUN COMMANDS ON virtualenv
+########################################## FROM HERE ON, RUN COMMANDS ON virtualenv ##########################################
 
--- install pip & requirements:
+------------------------------ install pip & requirements:
 python -m pip install --upgrade pip (don't know if run inside virtual env)
 python -m pip install -r requirements.txt
 
--- install django:
+------------------------------ install django:
 django-admin.exe startproject djangotut .
 
--- make & run migrations:
+------------------------------ make & run migrations:
 python manage.py makemigrations blog
 python manage.py migrate
 
--- run server:
+------------------------------ run server:
 python manage.py runserver
 
--- create app:
+------------------------------ create app:
 python manage.py startapp blog
 
--- create superuser:
+------------------------------ create superuser:
 python manage.py createsuperuser
 
-## PYTHONANYWHERE DEPLOY ##
+------------------------------ django shell
+python manage.py shell
 
--- remember to create new ApiToken
+------------------------------ query set commands:
+    from blog.models import Post
 
--- install everything needed
+    Post.objects.all() [brings list of all posts on the database]
+
+    from django.contrib.auth.models import User
+    User.objects.all()
+    me = User.objects.get(username='anotherUser')
+    Post.objects.create(author=me, title='Sample title', text='Test')
+
+    Post.objects.filter(author=me)
+    Post.objects.filter(title__contains='title')
+
+    from django.utils import timezone
+    Post.objects.filter(published_date__lte=timezone.now())
+
+    post = Post.objects.get(title="Sample title")
+    post.publish()
+
+    Post.objects.order_by('created_date') [ascending]
+    Post.objects.order_by('-created_date') [descending]
+
+    Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+
+########################################## PYTHONANYWHERE DEPLOY ##########################################
+
+------------------------------ remember to create new ApiToken
+
+------------------------------ install everything needed:
 pip3.8 install --user pythonanywhere
 
--- autoconfigure using code from github
+------------------------------ autoconfigure using code from github:
 pa_autoconfigure_django.py --python=3.8 https://github.com/<your-github-username>/my-first-blog.git
 
--- create superuser
+------------------------------ create superuser:
 python manage.py createsuperuser
