@@ -1,6 +1,9 @@
 # virtualenv #
 djangoenv/
 
+# vscode #
+.vscode/
+
 # Django #
 *.log
 *.pot
