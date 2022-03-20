@@ -1,0 +1,24 @@
+-- create & run virtualenv:
+python -m venv djangogirls
+djangoenv\Scripts\activate
+    (if error on windows):
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
+## FROM HERE ON, RUN COMMANDS ON virtualenv
+
+-- install pip & requirements:
+python -m pip install --upgrade pip (don't know if run inside virtual env)
+python -m pip install -r requirements.txt
+
+-- install django:
+django-admin.exe startproject djangotut .
+
+-- make & run migrations:
+python manage.py makemigrations blog
+python manage.py migrate
+
+-- run server:
+python manage.py runserver
+
+-- create app:
+python manage.py startapp blog
